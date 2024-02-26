@@ -1,0 +1,58 @@
+syntax = "proto3";
+option go_package = ".;user";
+package user;
+
+message User{
+  int64  Id       = 10;
+  string Username = 20;
+  string Password = 30;
+  string Phone    = 40;
+  string Email    = 50;
+  Sex    Sex      = 60;
+  int64  Age      = 70;
+}
+enum Sex{
+  Default = 0;
+  Man     = 10;
+  Woman   = 20;
+}
+service UserServer {
+  rpc GetUser(GetUserReq) returns (GetUserResp);
+  rpc GetUsers(GetUsersReq) returns (GetUsersResp);
+  rpc CreateUser(CreateUserReq) returns (CreateUserResp);
+  rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp);
+  rpc DeleteUser(DeleteUserReq) returns (DeleteUserResp);
+}
+message GetUserReq{
+  map<string,string> where = 10;
+}
+message GetUserResp{
+  User userInfo = 10;
+}
+
+message GetUsersReq{
+  int64 limit = 10;
+  int64 size  = 20;
+}
+message GetUsersResp{
+  repeated User userInfo = 10;
+}
+
+message CreateUserReq{
+  User userInfo = 10;
+}
+message CreateUserResp{
+  User userInfo = 10;
+}
+
+message UpdateUserReq{
+  User userInfo = 10;
+}
+message UpdateUserResp{
+  User userInfo = 10;
+}
+
+message DeleteUserReq{
+  int64 id = 10;
+}
+message DeleteUserResp{}
