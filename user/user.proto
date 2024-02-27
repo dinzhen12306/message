@@ -32,7 +32,7 @@ message GetUserResp{
 
 message GetUsersReq{
   int64 limit = 10;
-  int64 size  = 20;
+  int64 offset  = 20;
 }
 message GetUsersResp{
   repeated User userInfo = 10;
