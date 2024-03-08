@@ -1,0 +1,58 @@
+syntax = "proto3";
+option go_package = ".;product";
+package product;
+
+message Product{
+  int64  Id       = 10;
+  string Name     = 20;
+  double Price    = 30;
+  int64  Stock    = 40;
+  string Address  = 50;
+  Status Status   = 60;
+}
+
+enum Status {
+  Down    = 0;
+  Shelve  = 1;
+}
+
+service ProductServer {
+  rpc GetProduct(GetProductReq) returns (GetProductResp);
+  rpc GetProducts(GetProductsReq) returns (GetProductsResp);
+  rpc CreateProduct(CreateProductReq) returns (CreateProductResp);
+  rpc UpdateProduct(UpdateProductReq) returns (UpdateProductResp);
+  rpc DeleteProduct(DeleteProductReq) returns (DeleteProductResp);
+}
+message GetProductReq{
+  map<string,string> where = 10;
+}
+message GetProductResp{
+  Product userInfo = 10;
+}
+
+message GetProductsReq{
+  int64 limit = 10;
+  int64 offset  = 20;
+}
+message GetProductsResp{
+  repeated Product userInfo = 10;
+}
+
+message CreateProductReq{
+  Product userInfo = 10;
+}
+message CreateProductResp{
+  Product userInfo = 10;
+}
+
+message UpdateProductReq{
+  Product userInfo = 10;
+}
+message UpdateProductResp{
+  Product userInfo = 10;
+}
+
+message DeleteProductReq{
+  int64 id = 10;
+}
+message DeleteProductResp{}

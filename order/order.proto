@@ -1,0 +1,70 @@
+syntax = "proto3";
+option go_package = ".;order";
+package order;
+
+message Product{
+  int64  Id       = 10;
+  string Name     = 20;
+  double Price    = 30;
+  int64  Stock    = 40;
+  string Address  = 50;
+  Status Status   = 60;
+}
+
+enum Status {
+  Down    = 0;
+  Shelve  = 1;
+}
+
+message OrderItem{
+  Product Product  = 20;
+  double  SubTotal = 30;
+}
+
+message Order {
+  int64    Id             = 10;
+  int64    UserId         = 20;
+  string   OrderId        = 30;
+  repeated OrderItem Data = 40;
+}
+
+service OrderServer {
+  rpc GetOrder(GetOrderReq) returns (GetOrderResp);
+  rpc GetOrders(GetOrdersReq) returns (GetOrdersResp);
+  rpc CreateOrder(CreateOrderReq) returns (CreateOrderResp);
+  rpc UpdateOrder(UpdateOrderReq) returns (UpdateOrderResp);
+  rpc DeleteOrder(DeleteOrderReq) returns (DeleteOrderResp);
+}
+message GetOrderReq{
+  map<string,string> where = 10;
+}
+message GetOrderResp{
+  OrderItem userInfo = 10;
+}
+
+message GetOrdersReq{
+  int64 limit = 10;
+  int64 offset  = 20;
+}
+message GetOrdersResp{
+  repeated OrderItem userInfo = 10;
+}
+
+message CreateOrderReq{
+  OrderItem userInfo = 10;
+}
+message CreateOrderResp{
+  OrderItem userInfo = 10;
+}
+
+message UpdateOrderReq{
+  OrderItem userInfo = 10;
+}
+message UpdateOrderResp{
+  OrderItem userInfo = 10;
+}
+
+message DeleteOrderReq{
+  int64 id = 10;
+}
+message DeleteOrderResp{}
